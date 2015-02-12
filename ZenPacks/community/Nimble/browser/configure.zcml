@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configure xmlns="http://namespaces.zope.org/browser">
+
+    <!-- A resource directory contains static web content. -->
+    <resourceDirectory
+        name="nimble"
+        directory="resources"
+        />
+
+    <!-- Register custom JavaScript for NimbleDevices. -->
+    <!-- name field can be nearly anything unique 
+         If paths uses /++resource++ then following variable matches resourceDirectory name
+                and can provide a path down from there eg. /js/
+         The filename, ending in .js, does not have to match anything other than the actual file
+         The for statement says only to use this javascript viewlet for devices of object class
+             NimbleDevice (the 2nd NimbleDevice), defined in the file NimbleDevice (1st NimbleDevice)
+             that is located one directory up from here ie       ..       -->
+
+    <viewlet
+        name="js-nimble"
+        paths="/++resource++nimble/js/NimbleDevice.js"
+        weight="10"
+        for="..NimbleDevice.NimbleDevice"
+        manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+        class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+        permission="zope2.Public"
+        />
+
+</configure>

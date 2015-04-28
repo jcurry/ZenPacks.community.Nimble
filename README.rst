@@ -165,5 +165,5 @@ Change History
 * 1.0.0
    * Initial Release
 * 1.0.1
-   * Updated templates for NimbleGlobalStats to be DERVIVE not Gauge
+   * Updated templates for NimbleGlobalStats to be DERIVE not Gauge
 

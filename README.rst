@@ -166,4 +166,5 @@ Change History
    * Initial Release
 * 1.0.1
    * Updated templates for NimbleGlobalStats to be DERIVE not Gauge
+   * Thresholds on NimbleVolume template
 

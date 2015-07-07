@@ -7,7 +7,7 @@
 ZenPacks.community.Nimble.NimbleDevice
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.NewDeviceMap', 'zenoss.snmp.DeviceMap', 'NimbleVolumeMap']
+['zenoss.snmp.NewDeviceMap', 'zenoss.snmp.DeviceMap', 'NimbleVolumeMap', 'zenoss.snmp.SnmpV3EngineIdMap']
 </property>
 <property visible="True" type="lines" id="zDeviceTemplates" >
 ['Device', 'NimbleGlobalStats']
@@ -532,7 +532,7 @@ Shift volUsageHigh by 32 bits and add volUsageLow
 <property type="int" id="cycletime" mode="w" >
 300
 </property>
-<property type="boolean" id="debug" mode="w" >
+<property visible="True" type="boolean" id="debug" >
 True
 </property>
 <tomanycont id='datapoints'>
@@ -705,6 +705,32 @@ True
 </property>
 <property type="string" id="description" mode="rw" >
 Volume usage &gt; 85% of volSize and &lt; 95%. VolSize is in GB. volUsage is in MB
+</property>
+</object>
+<object id='90 percent used' module='Products.ZenModel.MinMaxThreshold' class='MinMaxThreshold'>
+<property id='zendoc' type='string'>
+Volume usage &gt; 90% of volSize. VolSize is in GB. volUsage is in MB
+</property>
+<property type="string" id="eventClass" mode="w" >
+/Perf/Nimble
+</property>
+<property type="int" id="severity" mode="w" >
+3
+</property>
+<property label="DataPoints" type="lines" id="dsnames" mode="w" >
+['volUsage_volUsage']
+</property>
+<property label="Enabled" type="boolean" id="enabled" mode="w" >
+True
+</property>
+<property type="string" id="maxval" mode="w" >
+(here.VolSize*1024)*0.9
+</property>
+<property type="int" id="escalateCount" mode="w" >
+0
+</property>
+<property type="string" id="description" mode="rw" >
+Volume usage &gt; 90% of volSize. VolSize is in GB. volUsage is in MB
 </property>
 </object>
 <object id='95 percent used' module='Products.ZenModel.MinMaxThreshold' class='MinMaxThreshold'>
@@ -883,6 +909,91 @@ ${graphPoint/id}
 <object id='volUsage' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
 <property type="long" id="sequence" mode="w" >
 3
+</property>
+<property select_variable="lineTypes" type="selection" id="lineType" mode="w" >
+LINE
+</property>
+<property type="long" id="lineWidth" mode="w" >
+1
+</property>
+<property type="boolean" id="stacked" mode="w" >
+False
+</property>
+<property type="string" id="format" mode="w" >
+%5.2lf%s
+</property>
+<property type="string" id="legend" mode="w" >
+${graphPoint/id}
+</property>
+<property type="long" id="limit" mode="w" >
+-1
+</property>
+<property type="string" id="rpn" mode="w" >
+1024,*,1024,*
+</property>
+<property type="string" id="dpName" mode="w" >
+volUsage_volUsage
+</property>
+<property type="string" id="cFunc" mode="w" >
+AVERAGE
+</property>
+</object>
+</tomanycont>
+</object>
+<object id='volUsage' module='Products.ZenModel.GraphDefinition' class='GraphDefinition'>
+<property type="int" id="height" mode="w" >
+100
+</property>
+<property type="int" id="width" mode="w" >
+500
+</property>
+<property type="string" id="units" mode="w" >
+Bytes
+</property>
+<property type="boolean" id="log" mode="w" >
+False
+</property>
+<property type="boolean" id="base" mode="w" >
+False
+</property>
+<property type="int" id="miny" mode="w" >
+-1
+</property>
+<property type="int" id="maxy" mode="w" >
+-1
+</property>
+<property type="boolean" id="hasSummary" mode="w" >
+True
+</property>
+<property type="long" id="sequence" mode="w" >
+0
+</property>
+<tomanycont id='graphPoints'>
+<object id='30 percent used' module='Products.ZenModel.ThresholdGraphPoint' class='ThresholdGraphPoint'>
+<property type="long" id="sequence" mode="w" >
+0
+</property>
+<property type="string" id="threshId" mode="w" >
+30 percent used
+</property>
+<property type="string" id="legend" mode="w" >
+${graphPoint/id}
+</property>
+</object>
+<object id='90 percent used' module='Products.ZenModel.ThresholdGraphPoint' class='ThresholdGraphPoint'>
+<property type="long" id="sequence" mode="w" >
+1
+</property>
+<property type="string" id="threshId" mode="w" >
+90 percent used
+</property>
+<property type="string" id="legend" mode="w" >
+${graphPoint/id}
+</property>
+</object>
+<object id='volUsage' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
+<property type="long" id="sequence" mode="w" >
+2
 </property>
 <property select_variable="lineTypes" type="selection" id="lineType" mode="w" >
 LINE

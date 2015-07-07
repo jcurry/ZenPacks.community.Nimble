@@ -168,3 +168,11 @@ Change History
    * Updated templates for NimbleGlobalStats to be DERIVE not Gauge
    * Thresholds on NimbleVolume template
 
+
+Acknowledgements
+================
+
+This ZenPack has been developed under contract to TuneIn Inc who have generously open-sourced
+it to the community.
+
+
